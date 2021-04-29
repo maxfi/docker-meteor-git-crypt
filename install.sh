@@ -1,8 +1,5 @@
 #!/bin/bash -e
 
-locale-gen en_US en_US.UTF-8 && \
-dpkg-reconfigure locales
-
 cd /root
 
 export DEBIAN_FRONTEND=noninteractive
