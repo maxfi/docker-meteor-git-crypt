@@ -7,21 +7,20 @@ mkdir -p $HOME/.ssh/
 mv config $HOME/.ssh/
 
 echo "================= Installing packages ==================="
+# https://stackoverflow.com/questions/8671308/non-interactive-method-for-dpkg-reconfigure-tzdata/51881727#51881727
 export DEBIAN_FRONTEND=noninteractive
-export DEBCONF_NONINTERACTIVE_SEEN=true
-echo 'tzdata tzdata/Areas select Etc' | debconf-set-selections; \
-echo 'tzdata tzdata/Zones/Etc select UTC' | debconf-set-selections; \
-
-apt-get update && apt-get install -y --no-install-recommends \ 
-  software-properties-common \ 
-  build-essential \ 
-  ca-certificates \ 
-  libssl-dev \ 
-  ssh-client \ 
-  git \ 
-  curl \ 
-  python \ 
-  xxd
+export DEBCONF_NONINTERACTIVE_SEEN=true 
+echo 'tzdata tzdata/Areas select Etc' | debconf-set-selections;
+echo 'tzdata tzdata/Zones/Etc select UTC' | debconf-set-selections;
+apt-get update && apt-get install -y --no-install-recommends \
+software-properties-common \
+build-essential \
+ca-certificates \
+libssl-dev \
+openssh-client \
+git \
+curl \
+xxd
 
 echo "================= Installing git-crypt ==================="
 git clone https://github.com/AGWA/git-crypt.git /tmp/git-crypt
