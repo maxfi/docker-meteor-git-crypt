@@ -3,6 +3,9 @@
 cd /root
 
 export DEBIAN_FRONTEND=noninteractive
+export DEBCONF_NONINTERACTIVE_SEEN=true
+echo 'tzdata tzdata/Areas select Etc' | debconf-set-selections; \
+echo 'tzdata tzdata/Zones/Etc select UTC' | debconf-set-selections; \
 
 echo "================= Updating package lists ==================="
 apt-get update
@@ -12,7 +15,7 @@ mkdir -p $HOME/.ssh/
 mv config $HOME/.ssh/
 
 echo "================= Installing basic packages ==================="
-apt-get install -y --no-install-recommends build-essential ca-certificates libssl-dev git curl python xxd
+apt-get install -y --no-install-recommends build-essential ca-certificates libssl-dev git ssh curl python xxd
 
 echo "================= Installing git-crypt ==================="
 git clone https://github.com/AGWA/git-crypt.git /tmp/git-crypt
